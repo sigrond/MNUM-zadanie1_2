@@ -1,4 +1,5 @@
 %Kody wyliczaj¹ce epsilon maszynowy
+%na podstawie: https://en.wikipedia.org/wiki/Machine_epsilon
 disp(sprintf('Aproksymacja Epsilonu Maszynowego:\n'));
 %Aproksymacja epsilonu maszynowego dla pojedyñczej precyzji
 dx=single(1.0);
