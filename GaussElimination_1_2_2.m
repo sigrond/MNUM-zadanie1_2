@@ -1,51 +1,51 @@
-function [ X, eX ] = GaussElimination_1_2_2( n )
+function [ X, eX ] = GaussElimination_1_2_2()
 %GaussElimination_1_2_2 Metoda eliminacji Gaussa z czêœciowym wyborem
 %elementu podstawowego (g³ównego) - Gaussa-Crouta
 %   rozwi¹zywanie 3  grup uk³adów równañ o ró¿nych rozmiarach
-if ~exist('n','var')
-    n=10;
-end
 
-function [x, ex] = GE(A,b)
-%funkca rozwi¹zuj¹ca zadany uk³ad równañ metod¹ Gaussa-Crouta
-%na podstawie: http://we.pb.edu.pl/~jforenc/2006_2007_02/PIF2-2007-Wykl-05-Dzienne.pdf
-%i: http://eduinf.waw.pl/inf/alg/001_search/0077.php
-%x - rozwi¹zanie
-%ex - b³¹d rozwi¹zania
-AB=[A,b];
-W=1:n+1;%numery kolumn
-for i=1:n-1
-    k=i;
-    %wyszukujemy element o najwiêkszym module
-    for j=i+1:n
-        if abs(AB(W(k),i))<abs(AB(W(j),i))
-            k=j;
+
+
+t0=tic;
+t1=tic;
+maxError=0;
+i=0;
+n=5;
+timeAproximation=0;
+
+while toc(t0)<5 && timeAproximation<10 && maxError<Inf
+t1=tic;
+i=i+1;
+n=n*2;
+nVector(i)=n;
+
+A1=zeros(n,n);
+b1=zeros(n,1);
+
+for k=1:n
+    for j=1:n
+        if k==j
+            A1(j,k)=7;
+        elseif k==j-1 || k==j+1
+            A1(j,k)=1;
+        else
+            A1(j,k)=0;
         end
     end
-    %w wektorze zamieniamy numery kolumn wg znalezionego elementu
-    tmp=W(k);
-    W(k)=W(i);
-    W(i)=tmp;
-    if abs(AB(W(i),i))<eps(0)
-        
-        return;
-    end
-    
-        
-%[a,ind]=max(abs(AB(:,i)));
-%zamieniamy miejscami pierwszy wiersz z wierszem, w którym wystêpuje element o najwiêkszym module
-tmp=AB(i,:);
-AB(i,:)=AB(ind,:);
-AB(ind,:)=tmp;
-%redukcja
+    b1(k)=1.4+0.6i;
+end
+
+[X,eX(i)]=GE(A1,b1);
+if eX(i)>maxError
+    maxError=eX(i);
+end
+
+lastExecutionTime=toc(t1);
+timeAproximation=lastExecutionTime^3;
 
 end
 
-
-
-end
-
-disp 'b'
+figure('Name','uk³ad 1');
+plot(nVector(1:i),eX(1:i));
 
 end
 
