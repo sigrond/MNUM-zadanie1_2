@@ -19,10 +19,11 @@ for i=1:n-1
     tmp=W(k);
     W(k)=W(i);
     W(i)=tmp;
-    if abs(AB(W(i),i))<eps%jeœli znaleziony element jest zerem, koñczymy
-        error('wybrany element jest zerem\n')
-        ex=Inf
-        return;
+    if abs(AB(W(i),i))<eps(0)%jeœli znaleziony element jest zerem, koñczymy
+        %error('wybrany element jest zerem');
+        ex=Inf;
+        %return;
+        break;
     end
     for j=i+1:n
         m=-AB(j,W(i))/AB(i,W(i));%wyznaczamy mno¿nik
@@ -33,10 +34,11 @@ for i=1:n-1
 end
 % wyliczamy kolejne niewiadome
 for i=n:-1:1
-    if abs(AB(i,W(i)))<eps
-        error('dzielnik zero\n')
-        ex=Inf
-        return;
+    if abs(AB(i,W(i)))<eps(0)
+        %error('dzielnik zero\n')
+        ex=Inf;
+        %return;
+        break;
     end
     s=AB(i,n+1);
     for j=n:-1:i+1
