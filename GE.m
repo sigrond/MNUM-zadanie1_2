@@ -4,7 +4,7 @@ function [X, ex] = GE(A,b)
 %i: http://eduinf.waw.pl/inf/alg/001_search/0077.php
 %X - rozwi¹zanie
 %ex - b³¹d rozwi¹zania
-AB=[A,b];
+AB=[A,-b];
 n=size(A,1);
 W=1:n+1;%numery kolumn
 for i=1:n-1
@@ -46,7 +46,10 @@ for i=n:-1:1
     end
     X(W(i))=-s/AB(i,W(i));
 end
-ex=n^3*2^(n-1)*eps;
+%ex=n^3*2^(n-1)*eps;
+r=A*X'-b;
+ex=norm(r);
+
 
 
 end
