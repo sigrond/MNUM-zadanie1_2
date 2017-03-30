@@ -6,3 +6,12 @@
 - GE.m - Implementacja metody eliminacji Gaussa.
 - JacobiMethod_1_2_3.m - Rozwi¹zywanie uk³adów równañ metod¹ Jacobiego, zadanie 3.
 - JacobiMethod.m - Implementacja metody Jacobiego.
+
+## TODO:
+- do czego s³u¿y epsilon maszynowy
+- jak analityczne wyznaczyæ epsilon maszynowy
+- wstawiæ kody
+- poprawiæ eliminacjê gaussa
+- opisaæ algorytmy
+- sprawdziæ uwrunkowanie
+- dla metody jacobiego sprawdzaæ promieñ zbie¿noœci
