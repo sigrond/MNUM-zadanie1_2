@@ -83,8 +83,8 @@ while toc(t0)<5 && timeAproximation<10 && maxError<Inf
         maxError=eX3(i);
     end
     
-    DA3=A3+1e-4;
-    Db3=b3+1e-4;
+    DA3=A3+eps;
+    Db3=b3+eps;
     DAB3=[DA3,-Db3];
     AB3=[A3,-b3];
     [DX3,DeX3]=GE(DA3,Db3);
