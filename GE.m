@@ -6,12 +6,12 @@ function [X, ex] = GE(A,b)
 %ex - b³¹d rozwi¹zania
 AB=[A,-b];
 n=size(A,1);
-W=1:n;%numery kolumn
+W=1:n;%numery wierszy
 for i=1:n-1
     k=i;
     %wyszukujemy element o najwiêkszym module
     for j=i+1:n
-        if abs(AB(W(k),i))<abs(AB(W(j),i))%to chyba da siê zrobiæ w jednej operacji
+        if abs(AB(W(k),i))<abs(AB(W(j),i))%to chyba da siê zrobiæ w jednej operacji max
             k=j;
         end
     end
@@ -19,7 +19,7 @@ for i=1:n-1
     tmp=W(k);
     W(k)=W(i);
     W(i)=tmp;
-    if abs(AB(W(i),i))<eps(0)%jeœli znaleziony element jest zerem, koñczymy
+    if abs(AB(W(i),i))<eps(1e-6)%jeœli znaleziony element jest zerem, koñczymy
         %error('wybrany element jest zerem');
         ex=Inf;
         %return;
@@ -35,7 +35,7 @@ for i=1:n-1
 end
 % wyliczamy kolejne niewiadome
 for i=n:-1:1
-    if abs(AB(W(i),i))<eps(0)
+    if abs(AB(W(i),i))<eps(1e-6)
         %error('dzielnik zero\n')
         ex=Inf;
         %return;
@@ -50,7 +50,4 @@ end
 %ex=n^3*2^(n-1)*eps;
 r=A*X'-b;
 ex=norm(r);
-
-
-
 end

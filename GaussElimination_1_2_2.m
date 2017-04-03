@@ -82,6 +82,13 @@ while toc(t0)<5 && timeAproximation<10 && maxError<Inf
     if eX3(i)>maxError
         maxError=eX3(i);
     end
+    
+    DA3=A3+1e-4;
+    Db3=b3+1e-4;
+    DAB3=[DA3,-Db3];
+    AB3=[A3,-b3];
+    [DX3,DeX3]=GE(DA3,Db3);
+    cond(i)=(norm(DX3-X3,Inf)/norm(X3,Inf))/(norm(DAB3-AB3,Inf)/norm(AB3,Inf));
 
     lastExecutionTime=toc(t1);
     timeAproximation=(lastExecutionTime/((n/2)^3))*n^3;
@@ -90,6 +97,9 @@ end
 
 figure('Name','uk³ad 3');
 plot(nVector(1:i),eX3(1:i));
+
+figure('Name','uwarunkowanie uk³adów 3');
+plot(nVector(1:i),cond(1:i));
 
 end
 
