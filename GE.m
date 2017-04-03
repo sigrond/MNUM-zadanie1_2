@@ -31,7 +31,7 @@ for i=1:n-1
             AB(W(j),kk)=AB(W(j),kk)+m*AB(W(i),kk);%to chyba da siê zrobiæ w jednej operacji
         end
     end
-    %AB(:,W(:))
+    %AB(W(:),:)
 end
 % wyliczamy kolejne niewiadome
 for i=n:-1:1
@@ -41,11 +41,11 @@ for i=n:-1:1
         %return;
         break;
     end
-    s=AB(i,n+1);
+    s=AB(W(i),n+1);
     for j=n:-1:i+1
-        s=s-AB(W(j),i)*X(W(j));
+        s=s+AB(W(i),j)*X(j);
     end
-    X(W(i))=-s/AB(W(i),i);
+    X(i)=-s/AB(W(i),i);
 end
 %ex=n^3*2^(n-1)*eps;
 r=A*X'-b;
